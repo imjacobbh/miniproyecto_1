@@ -1,17 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <title>eCOMATCH</title>
+  </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/styles.css" rel="stylesheet">
-    <script src="js/scripts.js"></script>
-    <title>Librerias Alerts</title>
-</head>
+  <header></header>
 
-<header>
-    
-</header>
-<body>
-</body>
+  <body>
+    <section class="score">
+        <span class="correct">0</span>/<span class="total">0</span>
+        <button id="play-again-btn">Continue</button>
+      </section>
+      <section class="draggable-items">
+        <!-- Will be dynamically populated - Example Element: -->
+        <!-- <i class="fab fa-codepen draggable" draggable="true" style="color: #111111;" id="codepen"></i> -->
+      </section>
+      <section class="matching-pairs">
+        <!-- Will be dynamically populated - Example Element: -->
+        <!-- <div class="matching-pair">
+          <span class="label">Codepen</span><span class="droppable" data-brand="codepen"></span>
+        </div> -->
+      </section>
+
+
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="js/scripts.js"></script>
+
+  </body>
 </html>
