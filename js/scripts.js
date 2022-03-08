@@ -66,6 +66,7 @@ const animales = [
 ]
 let correct = 0;
 let total = 0;
+let totalIntentos = 0;
 let totalCorrect = 0;
 let totalGame = 6;
 const totalDraggableItems = 3;
@@ -91,22 +92,27 @@ function initiateGame() {
 
     // Agregamos los animales que serán arrastrados a su habitat
     for (let i = 0; i < randomDraggableAnimals.length; i++) {
-        draggableItems.insertAdjacentHTML("beforeend", `
-         <img src="${randomDraggableAnimals[i].imagen}" class = "draggable" draggable = "true" id="${randomDraggableAnimals[i].nombre}">
-        `);
+        draggableItems.insertAdjacentHTML("beforeend", 
+        `<div class="col-4 col-md-12 animalss d-flex justify-content-center center" style="background-color: ${random_bg_color()};">
+        <img src="${randomDraggableAnimals[i].imagen}" style="width: auto; height: 70%"  class="draggable" draggable = "true" id="${randomDraggableAnimals[i].nombre}"/>
+    </div>`);
     }
+
 
     // Create "matching-pairs" and append to DOM
     for (let i = 0; i < randomDroppableHabitats.length; i++) {
-        matchingPairs.insertAdjacentHTML("beforeend", `
-        <div class="matching-pair">
-          <span class="label">${randomDroppableHabitats[i].nombre}</span>
-          <span class="droppable" id="${randomDroppableHabitats[i].nombre}1" draggable = "false" data-animal="${randomDroppableHabitats[i].nombre}"></span>
-          </div>
-      `);
+        matchingPairs.insertAdjacentHTML("beforeend", 
+        `<div class=" col-4 text-center matching-pair justify-content-center" style="height: 70%; width: 33%;" draggable = "false" >
+        <div class="droppable center" data-animal="${randomDroppableHabitats[i].nombre}"
+            style="height: 90%; border-radius: 100%;" draggable = "false" id="${randomDroppableHabitats[i].nombre}1">
+        </div>
+    </div>`
+      );
         let picUrl = "url('" + randomDroppableHabitats[i].habitat + "')"
         document.getElementById(randomDroppableHabitats[i].nombre + "1").style.backgroundImage = picUrl;
         document.getElementById(randomDroppableHabitats[i].nombre + "1").style.backgroundSize = "cover";
+        document.getElementById(randomDroppableHabitats[i].nombre + "1").style.backgroundRepeat = "no-repeat";
+        document.getElementById(randomDroppableHabitats[i].nombre + "1").style.backgroundPosition = "center";
     }
 
     draggableElements = document.querySelectorAll(".draggable");
@@ -166,6 +172,7 @@ function drop(event) {
     const habitat = event.target.getAttribute("data-animal");
     const isCorrectMatching = animalName === habitat;
     total++;
+    totalIntentos++;
     const animalObject = animales.find(obj => { return obj.nombre === animalName });
     if (isCorrectMatching) {
         var audio = new Audio(animalObject.sonido);
@@ -175,8 +182,12 @@ function drop(event) {
         draggableElement.classList.add("dragged");
         draggableElement.setAttribute("draggable", "false");
         event.target.appendChild(draggableElement);
+        event.target.insertAdjacentHTML("afterend", `<span  ondragstart="return false;" ondrop="return false;">${animalObject.nombre}</span>`);
         draggableElement.style.opacity = 1;
+        draggableElement.style.height = "auto";
+        draggableElement.style.width = "70%";
         correct++;
+        totalCorrect++;
     }
     else{
         var audio = new Audio("../sounds/wrong.mp3");
@@ -184,8 +195,8 @@ function drop(event) {
     }
     scoreSection.style.opacity = 0;
     setTimeout(() => {
-        correctSpan.textContent = correct;
-        totalSpan.textContent = total;
+        correctSpan.textContent = totalCorrect;
+        totalSpan.textContent = totalIntentos;
         scoreSection.style.opacity = 1;
     }, 200);
     if (correct === Math.min(totalMatchingPairs, totalDraggableItems)) { // Game Over!!
@@ -193,7 +204,6 @@ function drop(event) {
         setTimeout(() => {
             playAgainBtn.classList.add("play-again-btn-entrance");
         }, 200);
-        totalCorrect += correct;
     }
     if (totalCorrect == totalGame) {
         //GANÓ
@@ -223,8 +233,8 @@ function playAgainBtnClick() {
         while (draggableItems.firstChild) draggableItems.removeChild(draggableItems.firstChild);
         while (matchingPairs.firstChild) matchingPairs.removeChild(matchingPairs.firstChild);
         initiateGame();
-        correctSpan.textContent = correct;
-        totalSpan.textContent = total;
+        correctSpan.textContent = totalCorrect;
+        totalSpan.textContent = totalIntentos;
         draggableItems.style.opacity = 1;
         matchingPairs.style.opacity = 1;
         scoreSection.style.opacity = 1;
@@ -258,3 +268,10 @@ function generateRandomHabitatsArray(n, originalArray) {
     }
     return res;
 }
+function random_bg_color() {
+    var x = Math.floor(Math.random() * 256);
+    var y = Math.floor(Math.random() * 256);
+    var z = Math.floor(Math.random() * 256);
+    var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+    return bgColor;
+    }

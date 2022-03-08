@@ -1,19 +1,59 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
 
+
+img {
+  width: 100%;
+  height: auto;
+}
+.animals-container{
+  height: 72vh;
+  max-height: 72vh;;
+}
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+.habitats {
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.9);
+  font-size: 5.2vw;
+  background: #fff;
+  border-radius: 3px;
+  height: 72vh;
+  max-width: 100%;
+
+}
+.animalss {
+  height: 33%;
+  border-radius: 3px;
+  color: #fff;
+  transition: 2s;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.9);
 }
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Luckiest Guy", cursive;
   background-color: #eee;
   color: #111;
   cursor: url("../images/cursor0.png"), auto;
 }
-
+header {
+  background: #fe4a49;
+  height: auto;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  padding: 20px 0;
+  color: white;
+}
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .score {
-  font-family: monospace;
+  font-family: Luckiest Guy;
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
@@ -53,25 +93,10 @@ body {
   transform: translateX(6rem);
 }
 .draggable-items {
-  display: flex;
-  justify-content: center;
-  margin: 1rem 1rem 1.5rem 1rem;
   transition: opacity 0.5s;
 }
 .draggable {
-  height: 5rem;
-  width: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 4rem;
-  font-weight: bold;
-  margin: 0rem 0.5rem;
-  cursor: move;
   transition: opacity 0.2s;
-  cursor: url("../images/cursor.png"), auto;
-}
-.draggable:-moz-drag-over {
   cursor: url("../images/cursor.png"), auto;
 }
 
@@ -79,32 +104,10 @@ body {
   opacity: 0.5;
 }
 .matching-pairs {
+  border-radius: 3px;
   transition: opacity 0.5s;
 }
-.matching-pair {
-  height: 6rem;
-  width: 22rem;
-  margin: 1rem auto;
-  display: flex;
-  justify-content: space-between;
-}
-.matching-pair span {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  user-select: none;
-}
-.label {
-  width: 15rem;
-  font-size: 2rem;
-}
 .droppable {
-  width: 6rem;
-  font-size: 4rem;
-  background-color: #fff;
-  border: 3px dashed #111;
   transition: 0.2s;
 }
 .droppable-hover {
@@ -112,6 +115,7 @@ body {
   transform: scale(1.1);
   cursor: url("../images/cursor.png"), auto;
 }
+
 .dropped {
   border-style: solid;
 }
@@ -122,6 +126,11 @@ body {
 }
 .draggable.dragged:hover {
   opacity: 0.1;
+}
+.matching-pairs span{
+  font-size: 2vw;
+  margin: 0;
+  padding: 0;
 }
 
 @media (max-width: 600px) {
