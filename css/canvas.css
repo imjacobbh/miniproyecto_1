@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    font-family: "Luckiest Guy", cursive;
+    background-color: #eeeeee;
+    cursor: url("../images/cursor0.png"), auto;
+}
+
+#myCanvas {
+    border:1px solid #1f1f1f;
+}

@@ -17,8 +17,8 @@ img {
 .habitats {
   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.9);
   font-size: 5.2vw;
-  background: #fff;
   border-radius: 3px;
+  background-color: white;
   height: 72vh;
   max-width: 100%;
 
@@ -36,8 +36,20 @@ body {
   color: #111;
   cursor: url("../images/cursor0.png"), auto;
 }
+.game{
+
+}
+table{
+  width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+}
 header {
-  background: #fe4a49;
+  max-height: 20vh;
+  background:-webkit-radial-gradient(center center, circle,green , #CAE600);
+  background:-moz-radial-gradient(center center, circle,#CAE600 , green);
+  background:-o-radial-gradient(center center, circle,#CAE600 , green);
+  background:-ms-radial-gradient(center center, circle,#CAE600 , green);
   height: auto;
   text-align: center;
   width: 100%;
@@ -47,6 +59,12 @@ header {
   padding: 20px 0;
   color: white;
 }
+header > img {
+  max-width: 10vh;
+  height: auto;
+  width: auto;
+}
+
 .center{
   display: flex;
   justify-content: center;

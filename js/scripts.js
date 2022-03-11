@@ -2,65 +2,65 @@
 const animales = [
     {
         nombre: "Camello",
-        imagen: "../images/01 Camello.png",
-        sonido: "../sounds/camello.mp3",
-        habitat: "../images/01 Desierto.png",
+        imagen: "./images/01 Camello.png",
+        sonido: "./sounds/camello.mp3",
+        habitat: "./images/01 Desierto.png",
         selected: false
     },
     {
         nombre: "Ardilla",
-        imagen: "../images/02 Ardilla.png",
-        sonido: "../sounds/ardilla.mp3",
-        habitat: "../images/02 Arbol.jpg",
+        imagen: "./images/02 Ardilla.png",
+        sonido: "./sounds/ardilla.mp3",
+        habitat: "./images/02 Arbol.jpg",
         selected: false
     },
     {
         nombre: "Abeja",
-        imagen: "../images/03 Abeja.png",
-        sonido: "../sounds/abeja.mp3",
-        habitat: "../images/03 Panal.jpg",
+        imagen: "./images/03 Abeja.png",
+        sonido: "./sounds/abeja.mp3",
+        habitat: "./images/03 Panal.jpg",
         selected: false
     },
     {
         nombre: "Perrito",
-        imagen: "../images/04 Perrito.png",
-        sonido: "../sounds/perrito.mp3",
-        habitat: "../images/04 CASA PERRO.jpg",
+        imagen: "./images/04 Perrito.png",
+        sonido: "./sounds/perrito.mp3",
+        habitat: "./images/04 CASA PERRO.jpg",
         selected: false
     },
     {
         nombre: "Pinguino",
-        imagen: "../images/05 Pinguino.png",
-        sonido: "../sounds/pinguino.mp3",
-        habitat: "../images/05 iglu.jpg",
+        imagen: "./images/05 Pinguino.png",
+        sonido: "./sounds/pinguino.mp3",
+        habitat: "./images/05 iglu.jpg",
         selected: false
     },
     {
         nombre: "Jirafa",
-        imagen: "../images/06 Jirafa.png",
-        sonido: "../sounds/jirafa.mp3",
-        habitat: "../images/06 Sabana.png",
+        imagen: "./images/06 Jirafa.png",
+        sonido: "./sounds/jirafa.mp3",
+        habitat: "./images/06 Sabana.png",
         selected: false
     },
     {
         nombre: "Pajaro",
-        imagen: "../images/07 Pajaro.png",
-        sonido: "../sounds/pajaro.mp3",
-        habitat: "../images/07 Nido.png",
+        imagen: "./images/07 Pajaro.png",
+        sonido: "./sounds/pajaro.mp3",
+        habitat: "./images/07 Nido.png",
         selected: false
     },
     {
         nombre: "Pez",
-        imagen: "../images/08 Pez.png",
-        sonido: "../sounds/burbujasPez.mp3",
-        habitat: "../images/08 Arrecife.png",
+        imagen: "./images/08 Pez.png",
+        sonido: "./sounds/burbujasPez.mp3",
+        habitat: "./images/08 Arrecife.png",
         selected: false
     },
     {
         nombre: "Cangrejo",
-        imagen: "../images/09 Cangrejo.png",
-        sonido: "../sounds/cangrejo.mp3",
-        habitat: "../images/09 Playa.png",
+        imagen: "./images/09 Cangrejo.png",
+        sonido: "./sounds/cangrejo.mp3",
+        habitat: "./images/09 Playa.png",
         selected: false
     }
 ]
@@ -190,7 +190,7 @@ function drop(event) {
         totalCorrect++;
     }
     else{
-        var audio = new Audio("../sounds/wrong.mp3");
+        var audio = new Audio("./sounds/wrong.mp3");
         audio.play();
     }
     scoreSection.style.opacity = 0;
@@ -212,7 +212,45 @@ function drop(event) {
             'Buen trabajo',
             'Has ganado!',
             'success'
-        )
+        ).then(function() {
+            
+        var records = JSON.parse(localStorage.getItem("records") || "[]")
+        var nombre = localStorage.getItem("nombre");
+        var record = {nombre: nombre, movimientos:totalIntentos}
+        records.push(record);
+        records.sort(((a, b) => a.movimientos - b.movimientos));
+        let recordsJSON = JSON.stringify(records);
+        localStorage.setItem("records", recordsJSON);
+
+        tabla=`<table id="listado"><thead><th>Posición</th> <th>Nombre</th> <th>Movimientos</th></thead>`;
+        for(var i in records){
+            var position = 1+ parseInt(i,10);
+            tabla += `<tr><td>`+ position +`</td>`;
+            tabla += `<td>`+records[i].nombre+`</td>`;
+            tabla += `<td>`+records[i].movimientos+`</td>`;
+            tabla += `</tr>`;
+            if( position> 10) break;
+        }
+        tabla+=`</table>`
+
+        Swal.fire({
+            title: "Tabla de posiciones",
+            html: tabla,
+            confirmButtonColor: '#CAE600',
+            confirmButtonText: "Volver a jugar",
+            type: "success",
+            backdrop: `
+            rgba(202,230,0,0.6)
+            url("images/perrito.gif")
+            left top
+            no-repeat
+        `,
+        }).then(function() {
+            //here we will re direct to the screen to congrats the child
+            location.href = "index.html";
+        });
+        console.long(tabla)
+        });
     }
 
 }
