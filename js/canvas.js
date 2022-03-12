@@ -105,13 +105,20 @@ function clickMe() {
                 icon: 'error',
                 title: 'Y tu nombre?',
                 text: 'No podrás jugar si no ingresas un nombre!',
-                confirmButtonColor: '#CAE600'
+                confirmButtonColor: '#CAE600',
+                backdrop: `
+                rgba(202,230,0,0.6)
+                url("images/perritoEnojado.gif")
+                center top 
+                no-repeat
+            `
             })
             return false;
         }
         if (result.value != undefined) {
+            nombre = result.value;
             Swal.fire({
-                title: "Gracias!",
+                title: "Gracias, " + nombre + "!",
                 text: "Procede a divertirte!",
                 confirmButtonColor: '#CAE600',
                 type: "success",
@@ -122,7 +129,6 @@ function clickMe() {
                 no-repeat
             `,
             }).then(function() {
-                nombre = result.value;
                 localStorage.setItem('nombre', nombre);
                 console.log(nombre);
                 location.href = "game.html";

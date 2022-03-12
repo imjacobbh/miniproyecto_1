@@ -71,7 +71,7 @@ let totalCorrect = 0;
 let totalGame = 6;
 const totalDraggableItems = 3;
 const totalMatchingPairs = 3; // Debe de ser <= totalDraggableItems
-
+const imagenVictoria= "./images/jirafa.gif";
 const scoreSection = document.querySelector(".score");
 const correctSpan = scoreSection.querySelector(".correct");
 const totalSpan = scoreSection.querySelector(".total");
@@ -207,12 +207,24 @@ function drop(event) {
     }
     if (totalCorrect == totalGame) {
         //GANÓ
+        var nombre = localStorage.getItem("nombre");
         playAgainBtn.style.display = "none";
-        Swal.fire(
-            'Buen trabajo',
-            'Has ganado!',
-            'success'
-        ).then(function() {
+        var audio = new Audio("./sounds/victoria.mp3");
+        audio.play();
+        Swal.fire({
+        title: "FELICIDADES, " + nombre + "!!",
+        html: `Has guiado a los animalitos a su habitat, ahora están a salvo <br>
+        <img src=${imagenVictoria} style="width: 50%"/>
+        `,
+        confirmButtonColor: '#CAE600',
+        confirmButtonText: "Yei!",
+        type: "success",
+        backdrop: `
+            rgba(255,255,255,0.8)
+            url("images/won.gif")
+            left top
+            
+        `}).then(function() {
             
         var records = JSON.parse(localStorage.getItem("records") || "[]")
         var nombre = localStorage.getItem("nombre");
@@ -313,3 +325,11 @@ function random_bg_color() {
     var bgColor = "rgb(" + x + "," + y + "," + z + ")";
     return bgColor;
     }
+
+function back() {
+    location.href = "index.html";
+}
+
+function creditos(){
+    location.href = "creditos.html";
+}
