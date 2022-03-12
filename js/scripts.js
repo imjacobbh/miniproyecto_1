@@ -64,13 +64,17 @@ const animales = [
         selected: false
     }
 ]
+
 let correct = 0;
 let total = 0;
+
 let totalIntentos = 0;
 let totalCorrect = 0;
 let totalGame = 6;
+
 const totalDraggableItems = 3;
 const totalMatchingPairs = 3; // Debe de ser <= totalDraggableItems
+
 const imagenVictoria= "./images/jirafa.gif";
 const scoreSection = document.querySelector(".score");
 const correctSpan = scoreSection.querySelector(".correct");
@@ -199,12 +203,14 @@ function drop(event) {
         totalSpan.textContent = totalIntentos;
         scoreSection.style.opacity = 1;
     }, 200);
+    //si acertó 3, muestra el boton continuar
     if (correct === Math.min(totalMatchingPairs, totalDraggableItems)) { // Game Over!!
         playAgainBtn.style.display = "block";
         setTimeout(() => {
             playAgainBtn.classList.add("play-again-btn-entrance");
         }, 200);
     }
+    //si acertó los 6, esconde el boton de continuar y muestra pantalla de felicitación
     if (totalCorrect == totalGame) {
         //GANÓ
         var nombre = localStorage.getItem("nombre");
